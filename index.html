@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luna Once · Joyería de Autor | Puerto Varas, Patagonia</title>
+<meta name="description" content="Luna Once · Joyería contemporánea hecha a mano en Puerto Varas. Piezas únicas, diseño a medida, despacho a todo Chile.">
+
+<!-- Tipografía: pesos fijos (sin eje opsz variable, evita el rendering doble en algunos navegadores) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg-base:        #F5EDDF;
+    --bg-paper:       #FBF6EB;
+    --bg-deep:        #EAD9BD;
+    --ink:            #1E1812;
+    --ink-soft:       #4A3E30;
+    --ink-muted:      #8C7C66;
+    --line:           #D9C9AC;
+    --line-soft:      #E8DBC1;
+    --accent:         #8C6A35;
+    --accent-deep:    #5E4720;
+    --accent-soft:    #B89764;
+
+    --shadow-warm:    0 30px 60px -20px rgba(94, 71, 32, 0.18), 0 8px 20px -8px rgba(94, 71, 32, 0.12);
+    --shadow-card:    0 1px 2px rgba(30,24,18,0.04), 0 12px 32px -12px rgba(94, 71, 32, 0.18);
+    --shadow-deep:    0 40px 80px -30px rgba(94, 71, 32, 0.28), 0 12px 28px -10px rgba(94, 71, 32, 0.18);
+
+    --ease-out:       cubic-bezier(.22, .61, .36, 1);
+    --ease-smooth:    cubic-bezier(.7, 0, .25, 1);
+
+    --serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+    --sans:  'Manrope', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family: var(--sans);
+    background: var(--bg-base);
+    color: var(--ink);
+    line-height: 1.6;
+    font-weight: 400;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::before{
+    content:"";
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%; height:auto;}
+  button{font-family: inherit;}
+
+  /* ====== NAV ====== */
+  .nav{
+    position: fixed; top:0; left:0; right:0;
+    z-index: 100;
+    padding: 22px clamp(20px, 4vw, 60px);
+    display:flex; justify-content:space-between; align-items:center;
+    transition: background .5s var(--ease-out), padding .5s var(--ease-out), box-shadow .5s var(--ease-out);
+  }
+  .nav.scrolled{
+    background: rgba(245, 237, 223, 0.86);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 14px clamp(20px, 4vw, 60px);
+    box-shadow: 0 1px 0 var(--line-soft);
+  }
+  .brand{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .brand em{
+    font-style: italic;
+    color: var(--accent);
+    letter-spacing: 0;
+    margin: 0 4px;
+  }
+  .nav-links{
+    display:flex; gap: clamp(20px, 3vw, 40px);
+    list-style:none;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .nav-links a{
+    position:relative;
+    color: var(--ink-soft);
+    transition: color .3s var(--ease-out);
+  }
+  .nav-links a:hover{color: var(--accent-deep);}
+  .nav-links a::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:-6px;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .5s var(--ease-smooth);
+  }
+  .nav-links a:hover::after{transform: scaleX(1);}
+  .nav-toggle{display:none; background:none; border:none; cursor:pointer; font-size: 24px; color: var(--ink);}
+
+  /* ====== HERO ====== */
+  .hero{
+    position: relative;
+    min-height: 100vh;
+    padding: 140px clamp(20px, 4vw, 60px) 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(30px, 5vw, 80px);
+    align-items: center;
+  }
+  .hero-content{ position: relative; z-index: 2; }
+  .hero-eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+  .hero-eyebrow::before{
+    content:""; width: 36px; height:1px; background: var(--accent);
+  }
+  .hero h1{
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(46px, 7vw, 88px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .hero h1 em{
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent-deep);
+  }
+  .hero-sub{
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 44px;
+    font-weight: 300;
+  }
+  .hero-actions{ display:flex; gap: 18px; flex-wrap: wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap: 12px;
+    padding: 16px 32px;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor:pointer;
+    border: 1px solid var(--ink);
+    transition: background .4s var(--ease-out), color .4s var(--ease-out), border-color .4s var(--ease-out), transform .4s var(--ease-out);
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn-primary{ background: var(--ink); color: var(--bg-paper); }
+  .btn-primary:hover{
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+    transform: translateY(-2px);
+  }
+  .btn-ghost:hover{ background: var(--ink); color: var(--bg-paper); }
+  .btn svg{transition: transform .4s var(--ease-out);}
+  .btn:hover svg{transform: translateX(4px);}
+
+  .hero-image{
+    position: relative;
+    aspect-ratio: 4/5;
+    max-height: 78vh;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: var(--shadow-warm);
+  }
+  .hero-image img{
+    width:100%; height:100%; object-fit: cover;
+    transition: transform 1.8s var(--ease-out);
+  }
+  .hero-image:hover img{transform: scale(1.04);}
+  .hero-image::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(135deg, rgba(94,71,32,0) 60%, rgba(94,71,32,0.12));
+    pointer-events:none;
+  }
+  .hero-location{
+    position:absolute; top: 20px; left:20px;
+    background: rgba(251, 246, 235, 0.92);
+    backdrop-filter: blur(8px);
+    padding: 10px 18px;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    font-weight: 500;
+    display:flex; align-items:center; gap:8px;
+    border-radius: 2px;
+  }
+  .hero-location::before{
+    content:""; width:6px; height:6px; border-radius:50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(140,106,53,0.15);
+  }
+
+  .hero-meta{
+    grid-column: 1 / -1;
+    display:flex; gap: clamp(30px, 5vw, 60px);
+    margin-top: clamp(20px, 4vh, 50px);
+    padding-top: 40px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .meta-item .num{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--accent-deep);
+    line-height: 1;
+    font-weight: 300;
+  }
+  .meta-item .lbl{
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 8px;
+  }
+
+  /* ====== SECCIONES ====== */
+  section{ padding: clamp(80px, 12vh, 140px) clamp(20px, 4vw, 60px); position: relative; }
+  .container{max-width: 1280px; margin: 0 auto;}
+
+  .section-label{
+    display:flex; align-items:center; gap: 16px;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .section-label::before{
+    content:""; width: 28px; height:1px; background: var(--accent);
+  }
+  .section-title{
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 28px;
+    max-width: 720px;
+  }
+  .section-title em{ font-style: italic; color: var(--accent-deep); }
+
+  /* ====== SOBRE ====== */
+  .about{ background: var(--bg-paper); position: relative; }
+  .about-grid{
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: center;
+  }
+  .about-text p{
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .about-text p strong{ font-weight: 500; color: var(--ink); }
+  .about-values{
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 24px;
+  }
+  .value h4{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--accent-deep);
+    margin-bottom: 6px;
+  }
+  .value p{ font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+  .about-images{
+    position: relative;
+    aspect-ratio: 5/6;
+    width: 100%;
+  }
+  .about-img-1, .about-img-2{
+    position:absolute;
+    overflow:hidden;
+    box-shadow: var(--shadow-card);
+    border-radius: 3px;
+  }
+  .about-img-1{
+    top:0; left:0;
+    width: 64%;
+    aspect-ratio: 3/4;
+    z-index: 1;
+  }
+  .about-img-2{
+    bottom:0; right:0;
+    width: 56%;
+    aspect-ratio: 4/5;
+    z-index: 2;
+  }
+  .about-img-1 img, .about-img-2 img{
+    width:100%; height:100%; object-fit: cover;
+    transition: transform 1.6s var(--ease-out);
+  }
+  .about-img-1:hover img, .about-img-2:hover img{ transform: scale(1.05); }
+
+  /* ====== PROCESO · CAROUSEL ====== */
+  .process{ background: var(--bg-base); }
+  .process-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap: 40px; flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+  .process-head p{
+    max-width: 420px;
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .carousel{
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--bg-paper);
+    box-shadow: var(--shadow-deep);
+  }
+  .carousel-viewport{
+    overflow: hidden;
+    width: 100%;
+  }
+  .carousel-track{
+    display: flex;
+    transition: transform .95s var(--ease-smooth);
+    will-change: transform;
+  }
+  .slide{
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    min-height: 520px;
+  }
+  .slide-image{
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-deep);
+  }
+  .slide-image img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.8s var(--ease-out);
+  }
+  .slide.is-active .slide-image img{ transform: scale(1.02); }
+  .slide-image::after{
+    content:"";
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, rgba(30,24,18,0) 50%, rgba(30,24,18,0.45));
+    pointer-events: none;
+  }
+  .slide-num{
+    position: absolute;
+    bottom: 26px; left: 32px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(80px, 9vw, 130px);
+    color: var(--bg-paper);
+    line-height: .85;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .9s var(--ease-out) .15s, transform .9s var(--ease-out) .15s;
+  }
+  .slide.is-active .slide-num{ opacity: .95; transform: translateY(0); }
+
+  .slide-text{
+    padding: clamp(40px, 5vw, 70px);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .slide-step{
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 22px;
+    font-weight: 500;
+    display: inline-flex; align-items: center; gap: 14px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity .8s var(--ease-out) .25s, transform .8s var(--ease-out) .25s;
+  }
+  .slide-step::before{
+    content:""; width: 28px; height:1px; background: var(--accent);
+  }
+  .slide.is-active .slide-step{ opacity: 1; transform: translateY(0); }
+
+  .slide h3{
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity .8s var(--ease-out) .35s, transform .8s var(--ease-out) .35s;
+  }
+  .slide h3 em{ font-style: italic; color: var(--accent-deep); }
+  .slide.is-active h3{ opacity: 1; transform: translateY(0); }
+
+  .slide-body{
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 460px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity .8s var(--ease-out) .45s, transform .8s var(--ease-out) .45s;
+  }
+  .slide.is-active .slide-body{ opacity: 1; transform: translateY(0); }
+
+  .slide-meta{
+    margin-top: 32px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line-soft);
+    font-size: 13px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity .8s var(--ease-out) .55s, transform .8s var(--ease-out) .55s;
+  }
+  .slide-meta strong{
+    color: var(--ink-soft);
+    font-weight: 500;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    margin-right: 6px;
+  }
+  .slide.is-active .slide-meta{ opacity: 1; transform: translateY(0); }
+
+  .carousel-btn{
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    background: rgba(251, 246, 235, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    width: 52px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    color: var(--ink);
+    transition: background .35s var(--ease-out), color .35s var(--ease-out), border-color .35s var(--ease-out), transform .35s var(--ease-out);
+  }
+  .carousel-btn:hover{
+    background: var(--ink);
+    color: var(--bg-paper);
+    border-color: var(--ink);
+  }
+  .carousel-btn.prev{ left: 20px; }
+  .carousel-btn.next{ right: 20px; }
+  .carousel-btn.prev:hover{ transform: translateY(-50%) translateX(-3px); }
+  .carousel-btn.next:hover{ transform: translateY(-50%) translateX(3px); }
+  .carousel-btn svg{ width: 18px; height: 18px; }
+
+  .carousel-controls{
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 30px;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .carousel-dots{ display: flex; gap: 12px; align-items: center; }
+  .dot{
+    width: 32px; height: 2px;
+    background: var(--line);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: width .5s var(--ease-out), background .5s var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+  .dot.active{
+    background: var(--line);
+    width: 56px;
+  }
+  .dot.active::after{
+    content:"";
+    position: absolute; left:0; top:0; bottom:0;
+    background: var(--accent-deep);
+    animation: progress 6s linear forwards;
+  }
+  .dot.active.paused::after{ animation-play-state: paused; }
+  @keyframes progress{
+    from{ width: 0%; }
+    to{ width: 100%; }
+  }
+  .carousel-count{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-muted);
+  }
+  .carousel-count strong{
+    color: var(--accent-deep);
+    font-weight: 400;
+    font-size: 22px;
+  }
+
+  /* ====== GALERÍA ====== */
+  .gallery{ background: var(--bg-paper); }
+  .gallery-head{ text-align: center; margin-bottom: 80px; }
+  .gallery-head .section-label{ justify-content: center; }
+  .gallery-head .section-label::before{ display:none; }
+  .gallery-head .section-label::after{
+    content:""; width: 28px; height:1px; background: var(--accent);
+  }
+  .gallery-head .section-title{ margin: 0 auto 20px; text-align: center; }
+  .gallery-head p{
+    max-width: 540px;
+    margin: 0 auto;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .gallery-grid{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+  .piece{
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-deep);
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  .piece img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.4s var(--ease-out), filter .7s var(--ease-out);
+  }
+  .piece:hover img{ transform: scale(1.06); filter: brightness(1.05); }
+
+  .piece-overlay{
+    position: absolute;
+    inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 24px 28px;
+    background: linear-gradient(to top, rgba(30,24,18,0.82) 0%, rgba(30,24,18,0.18) 45%, transparent 70%);
+    opacity: 1;
+    transition: opacity .5s var(--ease-out);
+  }
+  .piece-overlay h4{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--bg-paper);
+    font-size: clamp(20px, 2.2vw, 26px);
+    margin-bottom: 4px;
+    transition: transform .6s var(--ease-out);
+  }
+  .piece-overlay p{
+    color: rgba(251,246,235,0.85);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    transition: transform .6s var(--ease-out) .05s;
+  }
+  /* Desktop: revelado al hover; Móvil: siempre visible */
+  @media (hover: hover){
+    .piece-overlay{ opacity: 0; }
+    .piece-overlay h4{ transform: translateY(12px); }
+    .piece-overlay p{ transform: translateY(12px); }
+    .piece:hover .piece-overlay{ opacity: 1; }
+    .piece:hover .piece-overlay h4,
+    .piece:hover .piece-overlay p{ transform: translateY(0); }
+  }
+
+  .p1{ grid-column: span 7; aspect-ratio: 4/3; }
+  .p2{ grid-column: span 5; aspect-ratio: 4/4; }
+  .p3{ grid-column: span 4; aspect-ratio: 3/4; }
+  .p4{ grid-column: span 4; aspect-ratio: 3/4; }
+  .p5{ grid-column: span 4; aspect-ratio: 3/4; }
+  .p6{ grid-column: span 12; aspect-ratio: 21/9; }
+
+  /* ====== SERVICIOS ====== */
+  .services{
+    background: var(--ink);
+    color: var(--bg-paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .services::before{
+    content:"";
+    position:absolute;
+    top: -20%; right: -10%;
+    width: 50%; height: 140%;
+    background: radial-gradient(circle, rgba(140,106,53,0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .services .section-label{ color: var(--accent-soft); }
+  .services .section-label::before{ background: var(--accent-soft); }
+  .services .section-title{ color: var(--bg-paper); }
+  .services .section-title em{ color: var(--accent-soft); }
+
+  .services-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+    background: rgba(216,201,172,0.18);
+    border: 1px solid rgba(216,201,172,0.18);
+    position: relative;
+  }
+  .service-card{
+    background: var(--ink);
+    padding: 50px 36px;
+    transition: background .5s var(--ease-out);
+  }
+  .service-card:hover{ background: #281F17; }
+  .service-card .icon{
+    width: 40px; height: 40px;
+    margin-bottom: 28px;
+    color: var(--accent-soft);
+  }
+  .service-card h4{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 26px;
+    margin-bottom: 14px;
+    color: var(--bg-paper);
+    line-height: 1.2;
+  }
+  .service-card h4 em{ font-style: italic; color: var(--accent-soft); }
+  .service-card p{
+    color: rgba(251,246,235,0.7);
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ====== CONTACTO ====== */
+  .contact{ background: var(--bg-base); padding-bottom: 60px; }
+  .contact-wrap{
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(40px, 6vw, 90px);
+    align-items: center;
+  }
+  .contact-info p.lead{
+    font-size: 19px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    font-weight: 300;
+    max-width: 520px;
+  }
+  .contact-details{ display: grid; gap: 26px; margin-bottom: 48px; }
+  .detail{
+    display: flex; gap: 20px; align-items: flex-start;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .detail:last-child{ border-bottom: none; padding-bottom: 0; }
+  .detail-icon{
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--accent-deep);
+  }
+  .detail h5{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .detail p{ color: var(--ink-soft); font-size: 14px; line-height: 1.6; }
+  .detail p strong{ color: var(--ink); font-weight: 500; }
+
+  .whatsapp-cta{
+    background: var(--bg-paper);
+    padding: 50px 44px;
+    border-radius: 6px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+  }
+  .whatsapp-cta::before{
+    content:"";
+    position:absolute; inset: 0;
+    background: radial-gradient(circle at top right, rgba(140,106,53,0.08), transparent 60%);
+    pointer-events: none;
+  }
+  .whatsapp-cta .eyebrow{
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .whatsapp-cta h3{
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(28px, 3vw, 36px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .whatsapp-cta h3 em{ font-style: italic; color: var(--accent-deep); }
+  .whatsapp-cta p{
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-bottom: 32px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .btn-whatsapp{
+    display:inline-flex; align-items:center; gap: 14px;
+    background: #25D366;
+    color: white;
+    padding: 18px 32px;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    transition: background .4s var(--ease-out), transform .4s var(--ease-out), box-shadow .4s var(--ease-out);
+    box-shadow: 0 10px 30px -10px rgba(37,211,102,0.5);
+    cursor: pointer;
+  }
+  .btn-whatsapp:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px -10px rgba(37,211,102,0.6);
+    background: #1FBA59;
+  }
+  .btn-whatsapp svg{ width: 22px; height: 22px; }
+
+  /* ====== FOOTER ====== */
+  .footer{
+    background: var(--bg-paper);
+    padding: 60px clamp(20px, 4vw, 60px) 30px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .footer-grid{
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .footer .brand{ display:block; margin-bottom: 18px; }
+  .footer-tagline{
+    color: var(--ink-soft);
+    font-size: 14px;
+    max-width: 320px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .footer h6{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 17px;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+  .footer ul{ list-style:none; }
+  .footer li{ margin-bottom: 8px; font-size: 14px; color: var(--ink-soft); }
+  .footer a{
+    color: var(--ink-soft);
+    transition: color .3s var(--ease-out);
+  }
+  .footer a:hover{ color: var(--accent-deep); }
+  .footer-bottom{
+    max-width: 1280px;
+    margin: 30px auto 0;
+    display:flex; justify-content:space-between; align-items: center;
+    font-size: 12px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* ====== FLOATING WHATSAPP ====== */
+  .float-wa{
+    position: fixed;
+    bottom: 28px; right: 28px;
+    z-index: 90;
+    width: 60px; height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 14px 32px -8px rgba(37,211,102,0.5);
+    transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out);
+    color: white;
+  }
+  .float-wa:hover{
+    transform: scale(1.08);
+    box-shadow: 0 20px 40px -10px rgba(37,211,102,0.65);
+  }
+  .float-wa::after{
+    content:"";
+    position: absolute; inset: -8px;
+    border-radius: 50%;
+    border: 2px solid rgba(37,211,102,0.4);
+    animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%{ transform: scale(1); opacity: 0.7;}
+    100%{ transform: scale(1.4); opacity: 0;}
+  }
+  .float-wa svg{ width: 28px; height: 28px; }
+
+  /* ====== REVEAL ON SCROLL ====== */
+  .reveal{
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
+  }
+  .reveal.in{ opacity: 1; transform: translateY(0); }
+  .reveal-delay-1{ transition-delay: .12s; }
+  .reveal-delay-2{ transition-delay: .24s; }
+  .reveal-delay-3{ transition-delay: .36s; }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 980px){
+    .nav-toggle{display: block; z-index: 110;}
+    .nav-links{
+      position: fixed; top:0; right:0; bottom:0;
+      width: 75%; max-width: 320px;
+      background: var(--bg-paper);
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+      gap: 32px;
+      transform: translateX(100%);
+      transition: transform .6s var(--ease-smooth);
+      box-shadow: -20px 0 50px -10px rgba(0,0,0,0.12);
+    }
+    .nav-links.open{ transform: translateX(0); }
+
+    .hero{
+      grid-template-columns: 1fr;
+      padding-top: 110px;
+      padding-bottom: 60px;
+      min-height: auto;
+    }
+    .hero-image{ order: -1; max-height: 56vh; aspect-ratio: 4/3.4; }
+    .hero-meta{
+      grid-column: 1;
+      margin-top: 32px;
+      padding-top: 32px;
+      gap: 30px;
+    }
+
+    .about-grid{ grid-template-columns: 1fr; }
+    .about-images{ max-width: 480px; margin: 0 auto; aspect-ratio: 5/6;}
+
+    .slide{
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .slide-image{ aspect-ratio: 4/3; }
+    .slide-text{ padding: 40px 32px; }
+    .carousel-btn{ width: 44px; height: 44px; }
+    .carousel-btn.prev{ left: 12px; }
+    .carousel-btn.next{ right: 12px; }
+
+    .gallery-grid{ grid-template-columns: repeat(6, 1fr); }
+    .p1, .p2{ grid-column: span 6; aspect-ratio: 4/3; }
+    .p3, .p4, .p5{ grid-column: span 2; }
+    .p6{ grid-column: span 6; aspect-ratio: 16/9; }
+
+    .services-grid{ grid-template-columns: 1fr; }
+    .contact-wrap{ grid-template-columns: 1fr; }
+    .footer-grid{ grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 560px){
+    .hero-meta{ flex-wrap: wrap; gap: 20px 32px; }
+    .slide-text{ padding: 32px 24px; }
+    .slide-num{ font-size: 70px; left: 22px; bottom: 18px; }
+    .carousel-btn{ display: none; }
+    .gallery-grid{ grid-template-columns: 1fr; gap: 16px; }
+    .p1,.p2,.p3,.p4,.p5,.p6{ grid-column: span 1; aspect-ratio: 4/3; }
+    .whatsapp-cta{ padding: 36px 28px; }
+    .float-wa{ width: 54px; height: 54px; bottom: 20px; right: 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <a href="#inicio" class="brand">LUNA ONCE</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menú">☰</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#sobre">Taller</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="inicio">
+  <div class="hero-content reveal">
+    <div class="hero-eyebrow">Puerto Varas · Patagonia</div>
+    <h1>Joyería forjada con <em>intención.</em></h1>
+    <p class="hero-sub">
+      Cada pieza nace de una conversación, se moldea con paciencia
+      y se entrega con historia. Diseño contemporáneo y oficio artesanal
+      desde el sur de Chile.
+    </p>
+    <div class="hero-actions">
+      <a href="#galeria" class="btn btn-primary">
+        Ver colección
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contacto" class="btn btn-ghost">Encarga tu pieza</a>
+    </div>
+  </div>
+
+  <div class="hero-image reveal reveal-delay-1">
+    <div class="hero-location">Luna Once · Puerto Varas</div>
+    <img src="imagenes/pieza-04-anillo linea de cobre.jpg" alt="Colgante de plata con piedra negra">
+  </div>
+
+  <div class="hero-meta reveal reveal-delay-2">
+    <div class="meta-item">
+      <div class="num">100%</div>
+      <div class="lbl">Hecho a mano</div>
+    </div>
+    <div class="meta-item">
+      <div class="num">A medida</div>
+      <div class="lbl">Piezas únicas</div>
+    </div>
+    <div class="meta-item">
+      <div class="num">Chile</div>
+      <div class="lbl">Despacho nacional</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ SOBRE ============ -->
+<section class="about" id="sobre">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-label">El Taller</div>
+        <h2 class="section-title">Oficio, materia y <em>tiempo.</em></h2>
+        <p>
+          <strong>Luna Once</strong> es un taller de joyería contemporánea instalado en Puerto Varas.
+          Trabajamos con <strong>plata, piedras y metales</strong>,
+          combinando técnicas tradicionales —martillado, engaste, forja en frío—
+          con un lenguaje de diseño actual.
+        </p>
+        <p>
+          No producimos en serie. Cada pieza es pensada para quien la va a llevar,
+          o concebida como una propuesta única, irrepetible.
+        </p>
+        <div class="about-values">
+          <div class="value">
+            <h4>Diseño a medida</h4>
+            <p>Acompañamos el proceso desde la conversación inicial hasta la entrega.</p>
+          </div>
+          <div class="value">
+            <h4>Servicios anexos</h4>
+            <p>Reparaciones, limpiezas y pulidos para dar brillo como en el primer dia.</p>
+          </div>
+          <div class="value">
+            <h4>Plata 950 / 925</h4>
+            <p>Aleaciones nobles y duraderas. Tu pieza está hecha para acompañarte.</p>
+          </div>
+          <div class="value">
+            <h4>Sin prisa</h4>
+            <p>Tiempos de oficio, dedicacion, trabajo unico.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-images reveal reveal-delay-1">
+        <div class="about-img-1">
+          <img src="imagenes/con Luna.jpeg" alt="Nosotros">
+        </div>
+        <div class="about-img-2">
+          <img src="imagenes/En el taller.jpeg" alt="La Marranita">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESO · CARRUSEL ============ -->
+<section class="process" id="proceso">
+  <div class="container">
+    <div class="process-head reveal">
+      <div>
+        <div class="section-label">Proceso</div>
+        <h2 class="section-title">De la idea a tu <em>mano.</em></h2>
+      </div>
+      <p>
+        Hacer una pieza tarda lo que tiene que tardar. Te contamos cómo trabajamos,
+        para que sepas qué esperar cuando encargas algo con nosotros.
+      </p>
+    </div>
+
+    <div class="carousel reveal" id="processCarousel" aria-roledescription="carrusel" aria-label="Proceso de creación">
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="carouselTrack">
+
+          <article class="slide is-active" aria-roledescription="slide" aria-label="1 de 5">
+            <div class="slide-image">
+              <img src="imagenes/pieza-06-anillo mokume gane.jpg" alt="Conversación inicial">
+              <div class="slide-num">01</div>
+            </div>
+            <div class="slide-text">
+              <span class="slide-step">Paso 01 — Conversación</span>
+              <h3>Escuchar la <em>idea.</em></h3>
+              <p class="slide-body">
+                Toda pieza empieza con una conversación. Nos cuentas qué buscas, a quién va dirigida
+                y qué historia quieres que cargue. Hablamos de referencias, materiales y presupuesto sin compromiso.
+              </p>
+              <div class="slide-meta"><strong>Duración:</strong>30 a 60 min · presencial o por WhatsApp</div>
+            </div>
+          </article>
+
+          <article class="slide" aria-roledescription="slide" aria-label="2 de 5">
+            <div class="slide-image">
+              <img src="imagenes/pieza-05-anillo martillado.jpg" alt="Boceto y materiales">
+              <div class="slide-num">02</div>
+            </div>
+            <div class="slide-text">
+              <span class="slide-step">Paso 02 — Boceto</span>
+              <h3>Dibujar el <em>diseño.</em></h3>
+              <p class="slide-body">
+                Trabajamos uno o dos bocetos con dimensiones reales, tipo de plata, piedras y acabados.
+                Iteramos hasta que el diseño te represente. Solo entonces avanzamos al taller.
+              </p>
+              <div class="slide-meta"><strong>Duración:</strong>3 a 7 días</div>
+            </div>
+          </article>
+
+          <article class="slide" aria-roledescription="slide" aria-label="3 de 5">
+            <div class="slide-image">
+              <img src="imagenes/pieza-01-martillo-thor.jpg" alt="Forja y modelado">
+              <div class="slide-num">03</div>
+            </div>
+            <div class="slide-text">
+              <span class="slide-step">Paso 03 — Forja</span>
+              <h3>Modelar la <em>materia.</em></h3>
+              <p class="slide-body">
+                Comienza el trabajo en taller. Laminado, recortado, martillado, soldadura y modelado a mano.
+                Cada técnica deja su marca y le da a la pieza su carácter irrepetible.
+              </p>
+              <div class="slide-meta"><strong>Duración:</strong>1 a 2 semanas</div>
+            </div>
+          </article>
+
+          <article class="slide" aria-roledescription="slide" aria-label="4 de 5">
+            <div class="slide-image">
+              <img src="imagenes/pieza-02-colgante con engaste central.jpg" alt="Engaste de piedras">
+              <div class="slide-num">04</div>
+            </div>
+            <div class="slide-text">
+              <span class="slide-step">Paso 04 — Engaste</span>
+              <h3>Engastar la <em>piedra.</em></h3>
+              <p class="slide-body">
+                Si la pieza lleva piedra, se selecciona, se prepara el bisel y se engasta con técnica tradicional.
+                Es el momento más delicado: aquí la pieza encuentra su centro.
+              </p>
+              <div class="slide-meta"><strong>Duración:</strong>3 a 5 días</div>
+            </div>
+          </article>
+
+          <article class="slide" aria-roledescription="slide" aria-label="5 de 5">
+            <div class="slide-image">
+              <img src="imagenes/pieza-03-anillo-cuarzo verde.jpg" alt="Pulido y entrega">
+              <div class="slide-num">05</div>
+            </div>
+            <div class="slide-text">
+              <span class="slide-step">Paso 05 — Entrega</span>
+              <h3>Pulir y <em>entregar.</em></h3>
+              <p class="slide-body">
+                Lijado final, pulido a brillo o satinado, control de calidad y empaque cuidado.
+                Te entregamos en Puerto Varas o despachamos a todo Chile con seguimiento.
+              </p>
+              <div class="slide-meta"><strong>Duración:</strong>2 a 3 días + despacho</div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <button class="carousel-btn prev" id="prevBtn" aria-label="Paso anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="carousel-btn next" id="nextBtn" aria-label="Paso siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <div class="carousel-controls">
+      <div class="carousel-dots" id="carouselDots">
+        <button class="dot active" data-idx="0" aria-label="Paso 1"></button>
+        <button class="dot" data-idx="1" aria-label="Paso 2"></button>
+        <button class="dot" data-idx="2" aria-label="Paso 3"></button>
+        <button class="dot" data-idx="3" aria-label="Paso 4"></button>
+        <button class="dot" data-idx="4" aria-label="Paso 5"></button>
+      </div>
+      <div class="carousel-count">
+        <strong id="currentSlide">01</strong> <span>/ 05</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERÍA ============ -->
+<section class="gallery" id="galeria">
+  <div class="container">
+    <div class="gallery-head reveal">
+      <div class="section-label">Galería</div>
+      <h2 class="section-title">Piezas <em>recientes.</em></h2>
+      <p>Una selección de trabajos terminados. Cada una con su propio relato.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="piece p1 reveal">
+        <img src="imagenes/pieza-04-anillo linea de cobre.jpg" alt="Colgante con piedra negra">
+        <div class="piece-overlay">
+          <h4>Linea de cobre</h4>
+          <p>Plata · cobre refinado · inspiración del norte</p>
+        </div>
+      </div>
+      <div class="piece p2 reveal reveal-delay-1">
+        <img src="imagenes/pieza-01-martillo-thor.jpg" alt="Colgante martillo con piedra azul">
+        <div class="piece-overlay">
+          <h4>Mjölnir</h4>
+          <p>Plata · Lapizlázuli · empuñadura entorchada</p>
+        </div>
+      </div>
+      <div class="piece p3 reveal">
+        <img src="imagenes/pieza-02-colgante con engaste central.jpg" alt="Anillo martillado de plata">
+        <div class="piece-overlay">
+          <h4>Colgante</h4>
+          <p>Plata 950 · piedra Onix · combinacion de cobre y bronce</p>
+        </div>
+      </div>
+      <div class="piece p4 reveal reveal-delay-1">
+        <img src="imagenes/pieza-05-anillo martillado.jpg" alt="Anillo con piedra verde">
+        <div class="piece-overlay">
+          <h4>Anillo martillado</h4>
+          <p>Plata 950</p>
+        </div>
+      </div>
+      <div class="piece p5 reveal reveal-delay-2">
+        <img src="imagenes/pieza-06-anillo mokume gane.jpg" alt="Anillo con incrustación de madera">
+        <div class="piece-overlay">
+          <h4>Anillo Bosque</h4>
+          <p>Plata · Mokume gane · Patron unico</p>
+        </div>
+      </div>
+      <div class="piece p6 reveal">
+        <img src="imagenes/pieza-03-anillo-cuarzo verde.jpg" alt="Anillo damasco con patrón">
+        <div class="piece-overlay">
+          <h4>cuarzo verde</h4>
+          <p>Plata 950 · Linea de cuarzo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS ============ -->
+<section class="services">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Servicio</div>
+      <h2 class="section-title">Pensado para <em>acompañarte.</em></h2>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 7l9-5 9 5v10l-9 5-9-5V7z"/>
+          <path d="M3 7l9 5 9-5M12 12v10"/>
+        </svg>
+        <h4>Despacho <em>Puerto Varas</em></h4>
+        <p>Entrega personal en Puerto Varas y alrededores (Llanquihue, Frutillar, Puerto Montt). Coordinamos por WhatsApp el día y lugar.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/>
+        </svg>
+        <h4>Envíos a <em>todo Chile</em></h4>
+        <p>Despachamos a regiones por encomienda asegurada. Empaque cuidado y seguimiento hasta que la pieza llega a tus manos.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        <h4>Atención <em>completa</em></h4>
+        <p>Lunes a viernes · 10:00 – 19:00<br>Sábados · 11:00 – 15:00<br>Atención por WhatsApp 24/7 (respondemos en horario).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="contact" id="contacto">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <div class="section-label">Contacto</div>
+        <h2 class="section-title">Hablemos de tu <em>pieza.</em></h2>
+        <p class="lead">
+          Cuéntanos qué tienes en mente. Una idea, una fecha, un recuerdo que
+          quieres llevar contigo. Te respondemos pronto.
+        </p>
+
+        <div class="contact-details">
+          <div class="detail">
+            <div class="detail-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <h5>Ubicación</h5>
+              <p><strong>Puerto Varas</strong>, Región de Los Lagos<br>Despachamos a todo Chile</p>
+            </div>
+          </div>
+          <div class="detail">
+            <div class="detail-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <div>
+              <h5>Horario de atención</h5>
+              <p>Lunes a viernes · <strong>10:00 – 19:00</strong><br>Sábados · 11:00 – 15:00<br>Domingo · cerrado</p>
+            </div>
+          </div>
+          <div class="detail">
+            <div class="detail-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13 1.05.37 2.07.72 3.06a2 2 0 01-.45 2.11L8.09 10.91a16 16 0 006 6l2.02-1.29a2 2 0 012.11-.45c.99.35 2.01.59 3.06.72A2 2 0 0122 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <h5>Teléfono · WhatsApp</h5>
+              <p><strong>+56 9 4286 0146</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="whatsapp-cta reveal reveal-delay-1">
+        <div class="eyebrow">Respuesta inmediata</div>
+        <h3>Escríbenos por <em>WhatsApp.</em></h3>
+        <p>
+          Es la forma más rápida de conversar sobre diseños, materiales,
+          tiempos y presupuestos. Sin compromiso.
+        </p>
+        <a href="https://wa.me/56942860146?text=Hola%2C%20vi%20su%20portafolio%20y%20me%20gustar%C3%ADa%20consultar%20por%20una%20pieza."
+           target="_blank" rel="noopener" class="btn-whatsapp">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Iniciar conversación
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="brand">LUNA<em>·</em>ONCE</div>
+      <p class="footer-tagline">
+        Joyería contemporánea hecha a mano en Puerto Varas, Patagonia chilena.
+        Piezas únicas, diseño a medida.
+      </p>
+    </div>
+    <div>
+      <h6>Navegación</h6>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#sobre">Taller</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Contacto</h6>
+      <ul>
+        <li>Puerto Varas, Chile</li>
+        <li>+56 9 4286 0146</li>
+        <li><a href="https://wa.me/56942860146" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li>Lun – Vie · 10:00 – 19:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Luna Once · Puerto Varas, Chile</div>
+    <div>Hecho con oficio en el sur</div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING WHATSAPP ============ -->
+<a href="https://wa.me/56942860146?text=Hola%2C%20vi%20su%20portafolio%20y%20me%20gustar%C3%ADa%20consultar%20por%20una%20pieza."
+   target="_blank" rel="noopener" class="float-wa" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  /* ===== Nav scroll state ===== */
+  const nav = document.getElementById('nav');
+  let scrollRaf = null;
+  window.addEventListener('scroll', () => {
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(() => {
+      nav.classList.toggle('scrolled', window.scrollY > 30);
+      scrollRaf = null;
+    });
+  });
+
+  /* ===== Mobile menu ===== */
+  const toggle = document.getElementById('navToggle');
+  const links  = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  /* ===== Reveal on scroll ===== */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ===== Process Carousel ===== */
+  (function(){
+    const carousel = document.getElementById('processCarousel');
+    const track    = document.getElementById('carouselTrack');
+    const slides   = Array.from(track.querySelectorAll('.slide'));
+    const prevBtn  = document.getElementById('prevBtn');
+    const nextBtn  = document.getElementById('nextBtn');
+    const dots     = Array.from(document.querySelectorAll('#carouselDots .dot'));
+    const countEl  = document.getElementById('currentSlide');
+    const total    = slides.length;
+
+    let idx = 0;
+    let timer = null;
+    const INTERVAL = 6000;
+    let isPaused = false;
+
+    function goTo(n){
+      idx = (n + total) % total;
+      track.style.transform = `translateX(-${idx * 100}%)`;
+
+      slides.forEach((s, i) => s.classList.toggle('is-active', i === idx));
+
+      dots.forEach((d, i) => {
+        if (i === idx) {
+          d.classList.remove('active');
+          void d.offsetWidth; // reinicia la animación de progreso
+          d.classList.add('active');
+          if (isPaused) d.classList.add('paused');
+          else d.classList.remove('paused');
+        } else {
+          d.classList.remove('active');
+          d.classList.remove('paused');
+        }
+      });
+
+      countEl.textContent = String(idx + 1).padStart(2, '0');
+    }
+
+    function next(){ goTo(idx + 1); }
+    function prev(){ goTo(idx - 1); }
+
+    function startTimer(){
+      stopTimer();
+      timer = setInterval(next, INTERVAL);
+    }
+    function stopTimer(){
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+    function restartTimer(){
+      stopTimer();
+      startTimer();
+    }
+
+    prevBtn.addEventListener('click', () => { prev(); restartTimer(); });
+    nextBtn.addEventListener('click', () => { next(); restartTimer(); });
+    dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); restartTimer(); }));
+
+    carousel.addEventListener('mouseenter', () => {
+      isPaused = true;
+      stopTimer();
+      const active = document.querySelector('.dot.active');
+      if (active) active.classList.add('paused');
+    });
+    carousel.addEventListener('mouseleave', () => {
+      isPaused = false;
+      const active = document.querySelector('.dot.active');
+      if (active) active.classList.remove('paused');
+      startTimer();
+    });
+
+    // Touch swipe
+    let startX = 0, currentX = 0, isDragging = false;
+    track.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+      currentX = startX;
+      isDragging = true;
+    }, {passive: true});
+    track.addEventListener('touchmove', e => {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX;
+    }, {passive: true});
+    track.addEventListener('touchend', () => {
+      if (!isDragging) return;
+      const delta = currentX - startX;
+      if (Math.abs(delta) > 50) {
+        if (delta < 0) { next(); }
+        else { prev(); }
+        restartTimer();
+      }
+      isDragging = false;
+    });
+
+    // Pause if tab hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopTimer();
+      else if (!isPaused) startTimer();
+    });
+
+    goTo(0);
+    startTimer();
+  })();
+</script>
+</body>
+</html>
