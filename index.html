@@ -188,8 +188,7 @@
 
   .hero-image{
     position: relative;
-    aspect-ratio: 4/5;
-    max-height: 78vh;
+    height: 78vh;
     overflow: hidden;
     border-radius: 4px;
     box-shadow: var(--shadow-warm);
@@ -613,12 +612,10 @@
     .piece:hover .piece-overlay p{ transform: translateY(0); }
   }
 
-  .p1{ grid-column: span 7; aspect-ratio: 4/3; }
-  .p2{ grid-column: span 5; aspect-ratio: 4/4; }
-  .p3{ grid-column: span 4; aspect-ratio: 3/4; }
-  .p4{ grid-column: span 4; aspect-ratio: 3/4; }
-  .p5{ grid-column: span 4; aspect-ratio: 3/4; }
-  .p6{ grid-column: span 12; aspect-ratio: 21/9; }
+  .piece--wide{ grid-column: span 7; aspect-ratio: 4/3; }
+  .piece--square{ grid-column: span 5; aspect-ratio: 1/1; }
+  .piece--tall{ grid-column: span 4; aspect-ratio: 3/4; }
+  .piece--banner{ grid-column: span 12; aspect-ratio: 21/9; }
 
   /* ====== SERVICIOS ====== */
   .services{
@@ -913,9 +910,9 @@
     .carousel-btn.next{ right: 12px; }
 
     .gallery-grid{ grid-template-columns: repeat(6, 1fr); }
-    .p1, .p2{ grid-column: span 6; aspect-ratio: 4/3; }
-    .p3, .p4, .p5{ grid-column: span 2; }
-    .p6{ grid-column: span 6; aspect-ratio: 16/9; }
+    .piece--wide, .piece--square{ grid-column: span 6; aspect-ratio: 4/3; }
+    .piece--tall{ grid-column: span 2; }
+    .piece--banner{ grid-column: span 6; aspect-ratio: 16/9; }
 
     .services-grid{ grid-template-columns: 1fr; }
     .contact-wrap{ grid-template-columns: 1fr; }
@@ -928,7 +925,7 @@
     .slide-num{ font-size: 70px; left: 22px; bottom: 18px; }
     .carousel-btn{ display: none; }
     .gallery-grid{ grid-template-columns: 1fr; gap: 16px; }
-    .p1,.p2,.p3,.p4,.p5,.p6{ grid-column: span 1; aspect-ratio: 4/3; }
+    .piece--wide,.piece--square,.piece--tall,.piece--banner{ grid-column: span 1; aspect-ratio: 4/3; }
     .whatsapp-cta{ padding: 36px 28px; }
     .float-wa{ width: 54px; height: 54px; bottom: 20px; right: 20px; }
   }
@@ -1180,46 +1177,67 @@
     </div>
 
     <div class="gallery-grid">
-      <div class="piece p1 reveal">
+      <div class="piece piece--wide reveal">
         <img src="imagenes/sol-turquesa.jpg" alt="Anillo con piedra turquesa ovalada, engaste cabuchón y borde cincelado">
         <div class="piece-overlay">
           <h4>Sol Turqueza</h4>
           <p>Plata 950 · Engaste Cabuchón · Borde Cincelado</p>
         </div>
       </div>
-      <div class="piece p2 reveal reveal-delay-1">
+      <div class="piece piece--square reveal reveal-delay-1">
         <img src="imagenes/pieza-01-martillo-thor.jpg" alt="Colgante martillo con piedra azul">
         <div class="piece-overlay">
           <h4>Mjölnir</h4>
           <p>Plata · Lapizlázuli · empuñadura entorchada</p>
         </div>
       </div>
-      <div class="piece p3 reveal">
+      <div class="piece piece--tall reveal">
         <img src="imagenes/pieza-02-colgante con engaste central.jpg" alt="Anillo martillado de plata">
         <div class="piece-overlay">
           <h4>Colgante</h4>
           <p>Plata 950 · piedra Onix · combinacion de cobre y bronce</p>
         </div>
       </div>
-      <div class="piece p4 reveal reveal-delay-1">
+      <div class="piece piece--tall reveal reveal-delay-1">
         <img src="imagenes/anillo-martillado.jpg" alt="Anillo de plata 950 con textura martillada">
         <div class="piece-overlay">
           <h4>Martillado</h4>
           <p>Plata 950 · Textura Martillada</p>
         </div>
       </div>
-      <div class="piece p5 reveal reveal-delay-2">
+      <div class="piece piece--tall reveal reveal-delay-2">
         <img src="imagenes/pieza-06-anillo mokume gane.jpg" alt="Anillo con incrustación de madera">
         <div class="piece-overlay">
           <h4>Anillo Bosque</h4>
           <p>Plata · Mokume gane · Patron unico</p>
         </div>
       </div>
-      <div class="piece p6 reveal">
+      <div class="piece piece--banner reveal">
         <img src="imagenes/anillos-plata-hoja-verde.jpg" alt="Anillo de plata con mosaico central, técnica de líneas">
         <div class="piece-overlay">
           <h4>Lineas</h4>
           <p>Plata 950 · Mosaico Central</p>
+        </div>
+      </div>
+      <div class="piece piece--wide reveal">
+        <img src="imagenes/codigo-ancestral.jpg" loading="lazy" alt="Anillo ancho de plata con incrustaciones de cobre en patrón geométrico">
+        <div class="piece-overlay">
+          <h4>Codigo Ancestral</h4>
+          <p>Plata 950 · Cobre · Geometría en relieve</p>
+        </div>
+      </div>
+      <div class="piece piece--square reveal reveal-delay-1">
+        <img src="imagenes/brazalete-cobre-trenzado.jpg" loading="lazy" alt="Brazalete de cobre trenzado">
+        <div class="piece-overlay">
+          <h4>Brazalete</h4>
+          <p>Cobre Trenzado</p>
+        </div>
+      </div>
+      <div class="piece piece--banner reveal">
+        <img src="imagenes/dijes-charms.jpg" loading="lazy" alt="Colección de dijes de plata con mosaicos de piedra">
+        <div class="piece-overlay">
+          <h4>Dijes / Charms</h4>
+          <p>Plata 950 · Mosaicos · Colección</p>
         </div>
       </div>
     </div>
