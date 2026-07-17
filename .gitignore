@@ -1,0 +1,16 @@
+# Documentos internos de trabajo (fichas de producto, fotos originales, Excel)
+documentos/
+
+# Auditorías internas de código (no deben quedar públicas en el repo)
+AUDITORIA.md
+AUDITORIA-actualizada.md
+
+# Configuración local de Claude Code
+.claude/
+
+# Archivos temporales de Excel
+~$*.xlsx
+
+# Buenas prácticas estándar
+node_modules/
+.DS_Store
