@@ -4,6 +4,7 @@ documentos/
 # Auditorías internas de código (no deben quedar públicas en el repo)
 AUDITORIA.md
 AUDITORIA-actualizada.md
+RESUMEN-JULIO-2026.md
 
 # Configuración local de Claude Code
 .claude/
